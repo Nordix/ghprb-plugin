@@ -259,7 +259,8 @@ public class Ghprb {
     }
 
     public boolean isTriggerPhrase(String comment) {
-        return checkPattern(triggerPhrase(), comment);
+        Pattern pattern = triggerPhrase();
+        return pattern != null && RegexUtil.find(pattern, comment, 1000);
     }
 
     public boolean ifOnlyTriggerPhrase() {
