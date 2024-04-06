@@ -20,7 +20,7 @@ final class RegexUtil {
 
     public static boolean find(Pattern pattern, String input, int timeoutMillis) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Future<Boolean> future = executor.submit(() -> pattern.matcher(input).find());
+        Future<Boolean> future = executor.submit(() -> pattern.matcher(new ThreadString(input)).matches());
         try {
             return future.get(timeoutMillis, TimeUnit.MILLISECONDS);
         } catch (InterruptedException | TimeoutException | ExecutionException e) {
